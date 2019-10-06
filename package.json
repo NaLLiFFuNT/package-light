@@ -1,6 +1,6 @@
 {
   "name": "package-light",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "cut only package dependencies to package-light.json",
   "main": "index.js",
   "repository": "https://github.com/NaLLiFFuNT/package-light",
@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^12.7.11"
+  },
+  "bin": {
+    "package-light": "./index.js"
   }
 }
