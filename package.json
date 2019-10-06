@@ -1,0 +1,15 @@
+{
+  "name": "package-light",
+  "version": "1.0.0",
+  "description": "cut only package dependencies to package-light.json",
+  "main": "index.js",
+  "repository": "https://github.com/NaLLiFFuNT/package-light",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^12.7.11"
+  }
+}
