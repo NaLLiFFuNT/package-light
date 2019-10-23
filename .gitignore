@@ -93,3 +93,4 @@ typings/
 .idea
 
 package-light.json
+package-light-lock.json

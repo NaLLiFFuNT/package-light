@@ -19,5 +19,18 @@ const lightPkg = omitEmpty({
     devDependencies: pkg.devDependencies
 });
 
-
 fs.writeFileSync('package-light.json', JSON.stringify(lightPkg));
+
+if (!fs.existsSync('package-lock.json')) {
+    return;
+}
+
+const pkgLock = JSON.parse(fs.readFileSync('package-lock.json').toString());
+const lightPkgLock = omitEmpty({
+    ...pkgLock,
+    version: '0.0.1'
+});
+
+fs.writeFileSync('package-light-lock.json', JSON.stringify(lightPkgLock));
+
+// Yarn.lock does not require contain package version
