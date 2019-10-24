@@ -1,40 +1,76 @@
-# Why
+# Why ?
 
-to reduce time you spent waiting your docker image is beign built.
+to reduce time you spent waiting your docker image is being built.
 
 # How to use?
 
-install as a dev dependency
+- Install as a dev dependency
 
-`npm i -d package-light`
+```
+npm i -d package-light
+```
 
 or
 
-`yarn add --dev package-light`
+```
+yarn add --dev package-light
+```
 
-add `package-light.json` to  `.git-ignore`
+- Add to your  `.git-ignore` file
+ 
+```
+package-light.json
+package-light-lock.json
+```
+ 
 
-add `pre` script for building docker image 
-`npx package-light` which generate `package-light.json`
+- Add `pre` script for building docker image `npx package-light` which generate `package-light.json` and `package-light-lock.json` in case your use npm.
 
 # Example
 
 somewhere in your package.json
 ```
 "scripts": {
-"prebuild:docker": "npx package-light",
-"postbuild:docker": "docker build -t my-image-tag .",
+"prebuild:docker": "npx package-light",             // generate `package-light.json` and `package-light-lock.json` (if needed)
+"build:docker": "docker build -t my-image-tag .",   // your command to build docker image
 }
 ``` 
 
-# Inside Dockerfile
+# Dockerfile example
+## npm
+```
+FROM node:12.13
 
-instead of copying `package.json` your should copy  `package-light.json` then install dependencies. This will greatly help to cache dependencies layer.
-after dependencies is installed you should copy the rest files & may override package-light.json with original package.json
+# Install app dependencies
+COPY ./package-light.json ./package.json
+COPY ./package-light-lock.json ./package-lock.json
+RUN npm i
+## <-- this layer is cached until your dependencies change
+
+# App source
+COPY . .
+# do your stuff here
+```
+
+## yarn
+```
+FROM node:12.13
+
+# Install app dependencies
+COPY package-light.json package.json
+COPY yarn.lock ./
+RUN yarn
+## <-- this layer is cached until your dependencies change
+# App source
+COPY . .
+# do your stuff here
+```
+
+This will greatly help to cache dependencies layer.
+After dependencies are installed you should copy the rest files and may override package-light.json with original package.json
+you may change your scripts, package version or other fields in your package json, it does not matter, dependencies layer remain unchanged.
 
 
 // TODO:
-- provide example of docker file
-- with yarn
-- with package-lock
-- add example to folder
+- add example for react-create-app
+- add example for express app
