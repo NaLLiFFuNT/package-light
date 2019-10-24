@@ -1,3 +1,7 @@
+[![npm version](https://badge.fury.io/js/package-light.svg)](//npmjs.com/package/package-light)
+[![dependencies Status](https://david-dm.org/nalliffunt/package-light/status.svg)](https://david-dm.org/nalliffunt/package-light)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/nalliffunt/package-light.svg)
+
 # Why ?
 
 to reduce time you spent waiting your docker image is being built.
@@ -16,7 +20,7 @@ or
 yarn add --dev package-light
 ```
 
-- Add to your  `.git-ignore` file
+- Add to your  `.gitignore` file
  
 ```
 package-light.json
